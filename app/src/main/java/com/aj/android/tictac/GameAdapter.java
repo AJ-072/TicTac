@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
 
-class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
+public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> {
     int count;
     onCLick onCLick;
     int width;
 
-    adapter(int count, int length, onCLick onCLick) {
+    public GameAdapter(int count, int length, onCLick onCLick) {
         this.count = count;
         this.onCLick = onCLick;
         this.width = length;
@@ -23,7 +23,7 @@ class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        view.setLayoutParams(new RecyclerView.LayoutParams((width - 90) / 3, (width - 90) / 3));
+        //view.setLayoutParams(new RecyclerView.LayoutParams((width - 90) / 3, (width - 90) / 3));
         return new MyViewHolder(view);
     }
 
@@ -52,7 +52,7 @@ class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
         }
     }
 
-    interface onCLick {
+    public interface onCLick {
         void OnClickListener(int position, View view);
     }
 }

@@ -1,4 +1,4 @@
-package com.aj.android.tictac;
+package com.aj.android.tictac.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -18,13 +18,16 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aj.android.tictac.R;
+import com.aj.android.tictac.GameAdapter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements com.aj.android.tictac.adapter.onCLick {
+public class MainActivity extends AppCompatActivity implements GameAdapter.onCLick {
     private int who = 1;
-    private adapter adapter;
+    private GameAdapter GameAdapter;
     private int winnerScore1 = 0, winnerScore2 = 0;
     private RecyclerView recyclerView;
     private List<List<Integer>> winner = new ArrayList<>();
@@ -51,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements com.aj.android.ti
         display.getMetrics(displayMetrics);
         int orientation = display.getRotation();
         if (orientation == Surface.ROTATION_0 || orientation == Surface.ROTATION_180)
-            adapter = new adapter(9, displayMetrics.widthPixels, this);
+            GameAdapter = new GameAdapter(9, displayMetrics.widthPixels, this);
         else
-            adapter = new adapter(9, displayMetrics.heightPixels - 100, this);
+            GameAdapter = new GameAdapter(9, displayMetrics.heightPixels - 100, this);
         layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(GameAdapter);
         setWinner();
     }
 
@@ -131,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements com.aj.android.ti
     void Restart() {
         player1.clear();
         player2.clear();
-        adapter.notifyDataSetChanged();
+        GameAdapter.notifyDataSetChanged();
         who = 1;
         count = 0;
     }
