@@ -1,25 +1,21 @@
 package com.aj.android.tictac.activities;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aj.android.tictac.R;
-import com.aj.android.tictac.GameAdapter;
+import com.aj.android.tictac.adapter.GameAdapter;
+import com.aj.android.tictac.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,23 +28,18 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.onCLi
     private RecyclerView recyclerView;
     private List<List<Integer>> winner = new ArrayList<>();
     private int count = 0;
-    private TextView won1, loss1, won2, loss2;
     private List<Integer> player1 = new ArrayList<>();
     private List<Integer> player2 = new ArrayList<>();
     private RecyclerView.LayoutManager layoutManager;
 
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Log.d("tag", "onCreate: ");
-        recyclerView = findViewById(R.id.recycler);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        won1 = findViewById(R.id.winnerScore1);
-        won2 = findViewById(R.id.winnerScore2);
-        loss1 = findViewById(R.id.lossCount1);
-        loss2 = findViewById(R.id.lossCount2);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         Display display = getWindowManager().getDefaultDisplay();
         display.getMetrics(displayMetrics);
@@ -113,18 +104,10 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.onCLi
     void gameOver(String Reason) {
         new AlertDialog.Builder(this)
                 .setTitle(Reason)
-                .setNegativeButton("Restart", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Restart();
-                    }
-                })
-                .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        onBackPressed();
-                    }
+                .setNegativeButton("Restart", (dialog, which) -> Restart())
+                .setPositiveButton("Exit", (dialog, which) -> {
+                    dialog.dismiss();
+                    onBackPressed();
                 })
                 .setCancelable(false)
                 .create()
@@ -145,9 +128,5 @@ public class MainActivity extends AppCompatActivity implements GameAdapter.onCLi
         } else {
             winnerScore2++;
         }
-        won1.setText("won: " + winnerScore1);
-        loss1.setText("loss: " + winnerScore2);
-        won2.setText("won: " + winnerScore2);
-        loss2.setText("loss: " + winnerScore1);
     }
 }

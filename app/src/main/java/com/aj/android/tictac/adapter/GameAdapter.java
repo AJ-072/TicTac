@@ -1,4 +1,4 @@
-package com.aj.android.tictac;
+package com.aj.android.tictac.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.aj.android.tictac.R;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> {
     int count;
@@ -23,7 +25,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        //view.setLayoutParams(new RecyclerView.LayoutParams((width - 90) / 3, (width - 90) / 3));
+        view.setLayoutParams(new RecyclerView.LayoutParams((width - 90) / 3, (width - 90) / 3));
         return new MyViewHolder(view);
     }
 

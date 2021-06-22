@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:andriod="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:andriod="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    andriod:layout_height="match_parent"
-    andriod:layout_width="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    andriod:layout_width="match_parent"
+    andriod:layout_height="match_parent">
 
     <include
+        andriod:id="@+id/player1"
         layout="@layout/player_data"
+        andriod:layout_width="wrap_content"
+        andriod:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <include
-        andriod:id="@+id/include"
-        layout="@layout/player_data" />
+        andriod:id="@+id/player2"
+        layout="@layout/player_data"
+        andriod:layout_width="wrap_content"
+        andriod:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        andriod:id="@+id/recycler"
+        andriod:layout_width="match_parent"
+        andriod:padding="10dp"
+        andriod:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player2"
+        app:spanCount="3"
+        tools:itemCount="9"
+        tools:listitem="@layout/item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
