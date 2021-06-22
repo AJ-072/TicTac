@@ -5,7 +5,4 @@
     <string name="player_name">Player Name</string>
     <string name="won_0">Won: 0</string>
     <string name="loss_0">loss: 0</string>
-    <string name="title_activity_splash_screen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
